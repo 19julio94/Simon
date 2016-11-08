@@ -16,6 +16,7 @@ public class MainActivity extends AppCompatActivity {
     Handler retardo1=new Handler();
     Handler retardo2=new Handler();
     Button[]botones;
+    MediaPlayer sonido[];
     int numeros[];
     int ordenJugador[];
     int botonesPulsados=0;
@@ -34,11 +35,16 @@ public class MainActivity extends AppCompatActivity {
         ordenJugador=new int[4];
         numeros=new int[4];
         botones=new Button[4];
-
+        iniciar=(Button)findViewById(R.id.bplay);
         botones[0] = (Button) findViewById(R.id.bazul);
         botones[1] = (Button) findViewById(R.id.brojo);
         botones[2] = (Button) findViewById(R.id.bverde);
         botones[3] = (Button) findViewById(R.id.bamarillo);
+        sonido=new MediaPlayer[4];
+        sonido[0]=MediaPlayer.create(this,R.raw.Moneda);
+        sonido[1]=MediaPlayer.create(this,R.raw.saltolargo);
+        sonido[2]=MediaPlayer.create(this,R.raw.Vaja);
+        sonido[3]=MediaPlayer.create(this,R.raw.Ladrilloroto);
 
     }
 
@@ -51,23 +57,27 @@ public class MainActivity extends AppCompatActivity {
         if (id == R.id.bazul) {
 
             v.setBackgroundResource(R.color.azulfuerte);
+            sonido[0].start();
             indice=0;
 
         } else if (id == R.id.brojo) {
 
 
             v.setBackgroundResource(R.color.rojofuerte);
+            sonido[1].start();
             indice=1;
 
         } else if (id == R.id.bverde) {
 
 
             v.setBackgroundResource(R.color.verdefuerte);
+            sonido[2].start();
             indice=2;
 
         } else {
 
             v.setBackgroundResource(R.color.amarillofuerte);
+            sonido[3].start();
             indice=3;
 
         }
@@ -110,6 +120,7 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void run() {
                         b.setBackgroundResource(R.color.azulfuerte);
+                        sonido[0].start();
                     }
                 },tiempoEncendido);
 
@@ -121,6 +132,7 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void run() {
                         b.setBackgroundResource(R.color.rojofuerte);
+                        sonido[1].start();
                     }
                 },tiempoEncendido);
             }else if(b.getId()==R.id.bverde){
@@ -129,6 +141,7 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void run() {
                         b.setBackgroundResource(R.color.verdefuerte);
+                        sonido[2].start();
                     }
                 },tiempoEncendido);
             }else {
@@ -137,6 +150,7 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void run() {
                         b.setBackgroundResource(R.color.amarillofuerte);
+                        sonido[3].start();
                     }
                 },tiempoEncendido);
             }
@@ -157,7 +171,7 @@ public class MainActivity extends AppCompatActivity {
         }
         tiempoEncendido=1500;
         tiempoApagado=1000;
-
+    
     }
 
     public void resetear(int id) {
